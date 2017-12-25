@@ -1,0 +1,153 @@
+<!--
+  Generated template for the InqForm2Page page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Hi Anon! Please provide additional details while you wait...</ion-title>
+    <ion-buttons end>
+      <button ion-button>Skip</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form [formGroup]="inqForm" (ngSubmit)="logForm()">
+    <ion-grid>
+      <!-- <ion-item-group> -->
+      <ion-item-divider color="light">Additional Education Details</ion-item-divider>
+      <div formGroupName="education">
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Qualification</ion-label>
+              <ion-select formControlName="qualification">
+                <ion-option value="ssc">SSC</ion-option>
+                <ion-option value="hsc">HSC</ion-option>
+                <ion-option value="undergraduate">Under Graduate</ion-option>
+                <ion-option value="graduate">Graduate</ion-option>
+                <ion-option value="postgraduate">Post Graduate</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Stream</ion-label>
+              <ion-select formControlName="stream">
+                <ion-option value="arts">Arts</ion-option>
+                <ion-option value="commerce">Commerce</ion-option>
+                <ion-option value="science">Science</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Year of Completion</ion-label>
+              <ion-input type="number" formControlName="year"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Institute</ion-label>
+              <ion-input type="text" formControlName="institute"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Education Status</ion-label>
+              <ion-select formControlName="status">
+                <ion-option value="pursuing">Pursuing</ion-option>
+                <ion-option value="completed">Completed</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Education Type</ion-label>
+              <ion-select formControlName="type">
+                <ion-option value="regular">Regular</ion-option>
+                <ion-option value="distance">Distance</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Marks</ion-label>
+              <ion-input type="number" formControlName="aggregate"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Marking Scheme</ion-label>
+              <ion-select formControlName="markScheme">
+                <ion-option value="percent">Percent</ion-option>
+                <ion-option value="gpa">GPA</ion-option>
+                <ion-option value="total">Total</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </div>
+      <!-- </ion-item-group> -->
+      <!-- <ion-item-group> -->
+      <ion-item-divider color="light">Guardian's Details</ion-item-divider>
+      <div formGroupName="guardian">
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Name</ion-label>
+              <ion-input type="text" formControlName="name"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Relation</ion-label>
+              <ion-input type="text" formControlName="relation"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Phone Number</ion-label>
+              <ion-input type="number" formControlName="phoneNumber"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Alternate Number</ion-label>
+              <ion-input type="number" formControlName="alternatePhone"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Email</ion-label>
+              <ion-input type="email" formControlName="email"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Occupation</ion-label>
+              <ion-input type="text" formControlName="occupation"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </div>
+      <!-- </ion-item-group> -->
+      <button ion-button full type="submit">Submit</button>
+    </ion-grid>
+  </form>
+</ion-content>
