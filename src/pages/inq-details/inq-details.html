@@ -1,0 +1,327 @@
+<!--
+  Generated template for the InqDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>inq-details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-grid>
+    <form>
+      <ion-item-divider color="light">Personal Details</ion-item-divider>
+      <div [formGroup]="personal">
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Name</ion-label>
+              <ion-input type="text" formControlName="name"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Mobile No.</ion-label>>
+              <ion-input type="number" formControlName="mobile"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Email</ion-label>
+              <ion-input type="email" formControlName="email"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Gender</ion-label>
+              <ion-select formControlName="gender">
+                <ion-option value="male">Male</ion-option>
+                <ion-option value="female">Female</ion-option>
+                <ion-option value="other">Other</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Date of Birth</ion-label>
+              <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" formControlName="dob"></ion-datetime>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Education</ion-label>
+              <ion-select formControlName="highestEducation">
+                <ion-option value="ssc">SSC</ion-option>
+                <ion-option value="hsc">HSC</ion-option>
+                <ion-option value="undergraduate">Under Graduate</ion-option>
+                <ion-option value="graduate">Graduate</ion-option>
+                <ion-option value="postgraduate">Post Graduate</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Computer Knowledge</ion-label>
+              <ion-select formControlName="computerKnowledge">
+                <ion-option value="basic">Basic</ion-option>
+                <ion-option value="advance">Advance</ion-option>
+                <ion-option value="none">None</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Course Interested In</ion-label>
+              <ion-select formControlName="areaOfInterest">
+                <ion-option value="animation">Animation</ion-option>
+                <ion-option value="webDev">Web Developement</ion-option>
+                <ion-option value="graphics">Graphic Design</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </div>
+      <ion-item-divider color="light">Address
+        <span (click)="changeState()" class="changeState" float-right>Rajasthan&nbsp;&nbsp;
+          <ion-icon name="md-create">&nbsp;</ion-icon>
+        </span>
+      </ion-item-divider>
+      <ion-row [formGroup]="address">
+        <ion-col no-padding>
+          <ion-row>
+            <ion-col *ngIf="diffState">
+              <ion-item>
+                <ion-label floating>Country</ion-label>
+                <ion-select formControlName="country">
+                  <ion-option value="india">India</ion-option>
+                  <ion-option value="nepal">Nepal</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col *ngIf="diffState">
+              <ion-item>
+                <ion-label floating>State</ion-label>
+                <ion-select formControlName="state">
+                  <ion-option value="rajasthan">Rajasthan</ion-option>
+                  <ion-option value="delhi">Delhi</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label floating>City</ion-label>
+                <ion-select formControlName="city">
+                  <ion-option value="jaipur">Jaipur</ion-option>
+                  <ion-option value="jodhpur">Jodhpur</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label floating>Pincode</ion-label>
+                <ion-input type="number" formControlName="pincode"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label floating>Area</ion-label>
+                <ion-select formControlName="area">
+                  <ion-option value="vaishali nagar">Vaishali Nagar</ion-option>
+                  <ion-option value="malviya nagar">Malviya Nagar</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label>Street</ion-label>
+                <ion-input type="text" formControlName="street"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <!-- <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label>Phone No.</ion-label>>
+                  <ion-input type="number" formControlName="phone"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row> -->
+      <ion-item-divider color="light">Additional Education Details</ion-item-divider>
+      <div [formGroup]="education">
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Qualification</ion-label>
+              <ion-select formControlName="qualification">
+                <ion-option value="ssc">SSC</ion-option>
+                <ion-option value="hsc">HSC</ion-option>
+                <ion-option value="undergraduate">Under Graduate</ion-option>
+                <ion-option value="graduate">Graduate</ion-option>
+                <ion-option value="postgraduate">Post Graduate</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Stream</ion-label>
+              <ion-select formControlName="stream">
+                <ion-option value="arts">Arts</ion-option>
+                <ion-option value="commerce">Commerce</ion-option>
+                <ion-option value="science">Science</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Year of Completion</ion-label>
+              <ion-input type="number" formControlName="year"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Institute</ion-label>
+              <ion-input type="text" formControlName="institute"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Education Status</ion-label>
+              <ion-select formControlName="status">
+                <ion-option value="pursuing">Pursuing</ion-option>
+                <ion-option value="completed">Completed</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Education Type</ion-label>
+              <ion-select formControlName="type">
+                <ion-option value="regular">Regular</ion-option>
+                <ion-option value="distance">Distance</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Marks</ion-label>
+              <ion-input type="number" formControlName="aggregate"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Marking Scheme</ion-label>
+              <ion-select formControlName="markScheme">
+                <ion-option value="percent">Percent</ion-option>
+                <ion-option value="gpa">GPA</ion-option>
+                <ion-option value="total">Total</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </div>
+      <ion-item-divider color="light">Guardian's Details</ion-item-divider>
+      <div [formGroup]="guardian">
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Name</ion-label>
+              <ion-input type="text" formControlName="name"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Relation</ion-label>
+              <ion-input type="text" formControlName="relation"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Phone Number</ion-label>
+              <ion-input type="number" formControlName="phoneNumber"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Alternate Number</ion-label>
+              <ion-input type="number" formControlName="alternatePhone"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Email</ion-label>
+              <ion-input type="email" formControlName="email"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Occupation</ion-label>
+              <ion-input type="text" formControlName="occupation"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </div>
+      <ion-item-divider color="light">How did you hear about us?</ion-item-divider>
+      <div [formGroup]="marketing">
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Source</ion-label>
+              <ion-select formControlName="source">
+                <ion-option value="news">Newspaper</ion-option>
+                <ion-option value="friend">Friends</ion-option>
+                <ion-option value="web">Internet</ion-option>
+                <ion-option value="social">Social Media</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Referred</ion-label>
+              <ion-select formControlName="isReferred">
+                <ion-option value="true">Yes</ion-option>
+                <ion-option value="false">No</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Referrer Name</ion-label>
+              <ion-input type="text" formControlName="referrer"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </div>
+      <button ion-button full type="submit">Update</button>
+    </form>
+  </ion-grid>
+</ion-content>

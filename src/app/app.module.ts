@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { InqForm1Page } from '../pages/inq-form1/inq-form1';
 import { InqForm2Page } from '../pages/inq-form2/inq-form2';
 import { InqForm3Page } from '../pages/inq-form3/inq-form3';
+import { InqDetailsPage } from '../pages/inq-details/inq-details';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -17,7 +18,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     InqForm1Page,
     InqForm2Page,
-    InqForm3Page
+    InqForm3Page,
+    InqDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     InqForm1Page,
     InqForm2Page,
-    InqForm3Page
+    InqForm3Page,
+    InqDetailsPage
   ],
   providers: [
     StatusBar,
