@@ -30,7 +30,7 @@ export class InqForm1Page {
       gender: ['', Validators.required],
       dob: ['', Validators.required],
       address: this.formBuilder.group({
-        street: ['', Validators.required],
+        addressLine1: ['', Validators.required],
         area: ['', Validators.required],
         city: ['jaipur', Validators.required],
         state: ['rajasthan', Validators.required],
@@ -40,7 +40,7 @@ export class InqForm1Page {
       // phone: [''],
       mobile: ['', Validators.required],
       email: ['', Validators.email],
-      highestEducation: ['', Validators.required],
+      hQualification: ['', Validators.required],
       computerKnowledge: ['', Validators.required],
       areaOfInterest: ['', Validators.required]
     });
