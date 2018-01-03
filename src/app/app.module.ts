@@ -11,6 +11,7 @@ import { InqDetailsPage } from '../pages/inq-details/inq-details';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { InqListPage } from '../pages/inq-list/inq-list';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     InqForm1Page,
     InqForm2Page,
     InqForm3Page,
-    InqDetailsPage
+    InqDetailsPage,
+    InqListPage
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     InqForm1Page,
     InqForm2Page,
     InqForm3Page,
-    InqDetailsPage
+    InqDetailsPage,
+    InqListPage
   ],
   providers: [
     StatusBar,

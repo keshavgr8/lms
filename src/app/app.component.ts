@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { InqForm1Page } from '../pages/inq-form1/inq-form1';
 import { InqDetailsPage } from '../pages/inq-details/inq-details';
+import { InqListPage } from '../pages/inq-list/inq-list';
 
 @Component({
   templateUrl: 'app.html'
@@ -24,7 +25,8 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'Inquiry Form', component: InqForm1Page },
-      { title: 'Inquiry Details', component: InqDetailsPage}
+      { title: 'Inquiry Details', component: InqDetailsPage},
+      { title: 'Inquiry List', component: InqListPage}
     ];
 
   }
