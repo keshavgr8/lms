@@ -17,7 +17,7 @@
 
 
 <ion-content>
-  <form [formGroup]="inqForm" (ngSubmit)="logForm()">
+  <form [formGroup]="inqForm" (ngSubmit)="logForm1()">
     <ion-grid>
       <ion-item-divider color="light">Personal Details</ion-item-divider>
       <ion-row>
@@ -47,16 +47,14 @@
           <ion-item>
             <ion-label>Gender</ion-label>
             <ion-select formControlName="gender">
-              <ion-option value="male">Male</ion-option>
-              <ion-option value="female">Female</ion-option>
-              <ion-option value="other">Other</ion-option>
+              <ion-option *ngFor="let gender of genders" [value]=gender.key>{{gender.value}}</ion-option>
             </ion-select>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item>
             <ion-label>Date of Birth</ion-label>
-            <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" formControlName="dob"></ion-datetime>
+            <ion-datetime displayFormat="D MMM YYYY" pickerFormat="D MMM YYYY" formControlName="dob"></ion-datetime>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -64,12 +62,8 @@
         <ion-col>
           <ion-item>
             <ion-label>Education</ion-label>
-            <ion-select formControlName="highestEducation">
-              <ion-option value="ssc">SSC</ion-option>
-              <ion-option value="hsc">HSC</ion-option>
-              <ion-option value="undergraduate">Under Graduate</ion-option>
-              <ion-option value="graduate">Graduate</ion-option>
-              <ion-option value="postgraduate">Post Graduate</ion-option>
+            <ion-select formControlName="hQualification">
+              <ion-option *ngFor="let qualification of hQualifications" [value]=qualification.key>{{qualification.value}}</ion-option>
             </ion-select>
           </ion-item>
         </ion-col>
@@ -77,9 +71,7 @@
           <ion-item>
             <ion-label>Computer Knowledge</ion-label>
             <ion-select formControlName="computerKnowledge">
-              <ion-option value="basic">Basic</ion-option>
-              <ion-option value="advance">Advance</ion-option>
-              <ion-option value="none">None</ion-option>
+              <ion-option *ngFor="let knowledge of computerKnowledge" [value]=knowledge.key>{{knowledge.value}}</ion-option>
             </ion-select>
           </ion-item>
         </ion-col>
@@ -87,9 +79,7 @@
           <ion-item>
             <ion-label>Course Interested In</ion-label>
             <ion-select formControlName="areaOfInterest">
-              <ion-option value="animation">Animation</ion-option>
-              <ion-option value="webDev">Web Developement</ion-option>
-              <ion-option value="graphics">Graphic Design</ion-option>
+              <ion-option *ngFor="let areaOfInterest of areasOfInterest" [value]=areaOfInterest.key>{{areaOfInterest.value}}</ion-option>
             </ion-select>
           </ion-item>
         </ion-col>
@@ -106,8 +96,7 @@
               <ion-item>
                 <ion-label floating>Country</ion-label>
                 <ion-select formControlName="country">
-                  <ion-option value="india">India</ion-option>
-                  <ion-option value="nepal">Nepal</ion-option>
+                  <ion-option *ngFor="let country of countries" [value]=country.key>{{country.value}}</ion-option>
                 </ion-select>
               </ion-item>
             </ion-col>
@@ -115,8 +104,7 @@
               <ion-item>
                 <ion-label floating>State</ion-label>
                 <ion-select formControlName="state">
-                  <ion-option value="rajasthan">Rajasthan</ion-option>
-                  <ion-option value="delhi">Delhi</ion-option>
+                  <ion-option *ngFor="let state of states" [value]=state.key>{{state.value}}</ion-option>
                 </ion-select>
               </ion-item>
             </ion-col>
@@ -126,23 +114,23 @@
               <ion-item>
                 <ion-label floating>City</ion-label>
                 <ion-select formControlName="city">
-                  <ion-option value="jaipur">Jaipur</ion-option>
-                  <ion-option value="jodhpur">Jodhpur</ion-option>
+                  <ion-option *ngFor="let city of cities" [value]=city.key>{{city.value}}</ion-option>
                 </ion-select>
               </ion-item>
             </ion-col>
             <ion-col>
               <ion-item>
                 <ion-label floating>Pincode</ion-label>
-                <ion-input type="number" formControlName="pincode"></ion-input>
+                <ion-select formControlName="pin">
+                  <ion-option *ngFor="let pincode of pincodes" [value]=pincode.key>{{pincode.value}}</ion-option>
+                </ion-select>
               </ion-item>
             </ion-col>
             <ion-col>
               <ion-item>
                 <ion-label floating>Area</ion-label>
                 <ion-select formControlName="area">
-                  <ion-option value="vaishali nagar">Vaishali Nagar</ion-option>
-                  <ion-option value="malviya nagar">Malviya Nagar</ion-option>
+                  <ion-option *ngFor="let area of areas" [value]=area.key>{{area.value}}</ion-option>
                 </ion-select>
               </ion-item>
             </ion-col>
@@ -151,7 +139,7 @@
             <ion-col>
               <ion-item>
                 <ion-label>Street</ion-label>
-                <ion-input type="text" formControlName="street"></ion-input>
+                <ion-input type="text" formControlName="addressLine1"></ion-input>
               </ion-item>
             </ion-col>
           </ion-row>

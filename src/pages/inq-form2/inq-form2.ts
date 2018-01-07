@@ -48,7 +48,7 @@ export class InqForm2Page {
     console.log('ionViewDidLoad InqForm2Page');
   }
 
-  private logForm(){
+  logForm2(){
     console.log(this.inqForm.value);
     this.navCtrl.push(InqForm3Page);
   }

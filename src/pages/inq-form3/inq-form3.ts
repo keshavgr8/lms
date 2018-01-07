@@ -31,7 +31,7 @@ export class InqForm3Page {
     console.log('ionViewDidLoad InqForm3Page');
   }
 
-  private logForm(){
+  logForm3(){
     console.log(this.inqForm.value);
   }
 
