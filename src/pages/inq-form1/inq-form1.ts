@@ -49,8 +49,8 @@ export class InqForm1Page {
         country: ['India', Validators.required]
       }),
       // phone: [''],
-      mobile: ['', Validators.required],
-      email: ['', Validators.email],
+      mobile: ['', [Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
+      email: ['', [Validators.required, Validators.email]],
       hQualification: ['', Validators.required],
       computerKnowledge: ['', Validators.required],
       areaOfInterest: ['', Validators.required]
