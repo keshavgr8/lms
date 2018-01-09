@@ -21,6 +21,8 @@ import { InqForm2Page } from '../inq-form2/inq-form2';
 export class InqForm1Page {
 
   private diffState: boolean;
+  private responseData;
+  private inqForm: FormGroup;
 
   genders = [{ key: "Male", value: "Male" }, { key: "Female", value: "Female" }];
   hQualifications = [{ key: "SSC", value: "SSC" }, { key: "HSC", value: "HSC" }, { key: "Undergraduate", value: "Under Graduate" }, { key: "Graduate", value: "Graduate" }, { key: "Post Graduate", value: "Post Graduate" }, { key: "Engineer", value: "Engineer" }, { key: "Diploma", value: "Diploma" }];
@@ -31,8 +33,6 @@ export class InqForm1Page {
   cities = [{ key: "Jaipur", value: "Jaipur" }, { key: "Jodhpur", value: "Jodhpur" }];
   pincodes = [{ key: "302021", value: "302021" }];
   areas = [{ key: "Vaishali Nagar", value: "Vaishali Nagar" }];
-
-  private inqForm: FormGroup;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private toastCtrl: ToastController) {
     this.inqForm = this.formBuilder.group({
@@ -80,6 +80,7 @@ export class InqForm1Page {
   }
 
   private toast;
+  
   presentToast(message) {
     this.toast = this.toastCtrl.create({
       message: message,
@@ -97,7 +98,15 @@ export class InqForm1Page {
       // setTimeout(()=>{this.navCtrl.push(InqForm2Page);},2000);
       this.inqProvider.createInq(this.inqForm.value)
         .subscribe(
-        data => { console.log("POST successful, the response data is:", data) },
+        data => { 
+          this.responseData = data;
+
+          if(this.responseData.data){
+            console.log("POST successful, the response data is:", data)
+          }else{
+            console.log("POST unsucessful, server responded with error", this.responseData.exception)
+          }
+        },
         error => { console.log("POST unsuccessful, the server returned this error:", error); this.loading.dismissAll(); },
         () => { console.log("complete"); this.loading.dismissAll(); }
         );
