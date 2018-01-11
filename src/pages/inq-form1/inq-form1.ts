@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
 import { InqProvider } from '../../providers/inq/inq';
+import { NotificationProvider } from '../../providers/notification/notification'
 import { InqForm2Page } from '../inq-form2/inq-form2';
 
 /**
@@ -34,7 +35,7 @@ export class InqForm1Page {
   pincodes = [{ key: "302021", value: "302021" }];
   areas = [{ key: "Vaishali Nagar", value: "Vaishali Nagar" }];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider) {
     this.inqForm = this.formBuilder.group({
       name: ['', Validators.required],
       // lname: [''],
@@ -79,18 +80,6 @@ export class InqForm1Page {
     this.loading.present();
   }
 
-  private toast;
-  
-  presentToast(message) {
-    this.toast = this.toastCtrl.create({
-      message: message,
-      position: "top",
-      showCloseButton: true,
-      duration: 3000
-    });
-    this.toast.present();
-  }
-
   logForm1() {
     if(this.inqForm.valid){
       console.log("Form to be logged", this.inqForm.value);
@@ -102,8 +91,10 @@ export class InqForm1Page {
           this.responseData = data;
 
           if(this.responseData.data){
+            this.notify.showInfo("Inquiry Registered Successfully");
             console.log("POST successful, the response data is:", data)
           }else{
+            this.notify.showError("Server retutned an error. Cannot register inquiry.")
             console.log("POST unsucessful, server responded with error", this.responseData.exception)
           }
         },
@@ -111,7 +102,7 @@ export class InqForm1Page {
         () => { console.log("complete"); this.loading.dismissAll(); }
         );
     }else{
-      this.presentToast("Invalid Form! Please fill proper values");
+      this.notify.showError("Invalid Form! Please fill proper values");
     }
   }
 

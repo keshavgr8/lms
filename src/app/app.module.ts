@@ -16,6 +16,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { InqProvider } from '../providers/inq/inq';
+import { NotificationProvider } from '../providers/notification/notification';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { InqProvider } from '../providers/inq/inq';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    InqProvider
+    InqProvider,
+    NotificationProvider
   ]
 })
 export class AppModule {}
