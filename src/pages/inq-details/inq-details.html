@@ -46,7 +46,7 @@
           <ion-col>
             <ion-item>
               <ion-label>Date of Birth</ion-label>
-              <ion-datetime displayFormat="D MMM YYYY" pickerFormat="D MMM YYYY" formControlName="dob"></ion-datetime>
+              <ion-datetime displayFormat="D MMM YYYY" pickerFormat="D MMM YYYY" min = "1900" [max] = "today" formControlName="dob"></ion-datetime>
             </ion-item>
           </ion-col>
         </ion-row>

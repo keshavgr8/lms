@@ -92,6 +92,8 @@ export class InqDetailsPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad InqDetailsPage');
   }
+  
+  today : string = new Date().toISOString();
 
   changeState() {
     this.diffState = !this.diffState;
