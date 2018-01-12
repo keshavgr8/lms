@@ -10,6 +10,23 @@ import { Validators } from '@angular/forms';
 })
 export class InqDetailsPage {
 
+  genders = [{ key: "Male", value: "Male" }, { key: "Female", value: "Female" }];
+  hQualifications = [{ key: "SSC", value: "SSC" }, { key: "HSC", value: "HSC" }, { key: "Undergraduate", value: "Under Graduate" }, { key: "Graduate", value: "Graduate" }, { key: "Post Graduate", value: "Post Graduate" }, { key: "Engineer", value: "Engineer" }, { key: "Diploma", value: "Diploma" }];
+  computerKnowledge = [{ key: "Basic", value: "Basic" }, { key: "Prior", value: "Prior" }, { key: "Advance", value: "Advance" }, { key: "None", value: "None" }];
+  areasOfInterest = [{ key: "VFX", value: "VFX" }, { key: "Web Developement", value: "Web Developement" }, { key: "Web Design", value: "Web Design" }];
+  countries = [{ key: "India", value: "India" }];
+  states = [{ key: "Rajasthan", value: "Rajasthan" }];
+  cities = [{ key: "Jaipur", value: "Jaipur" }, { key: "Jodhpur", value: "Jodhpur" }];
+  pincodes = [{ key: "302021", value: "302021" }];
+  areas = [{ key: "Vaishali Nagar", value: "Vaishali Nagar" }];
+  streams = [{ key: "Science", value: "Science" },{ key: "Arts", value: "Arts" },{ key: "Commerce", value: "Commerce" }];
+  eduStatus = [{ key: "Completed", value: "Completed" },{ key: "Pursuing", value: "Pursuing" }];
+  eduType = [{ key: "Distance", value: "Distance" },{ key: "Regular", value: "Regular" }];
+  markScheme = [{ key: "Percentage", value: "Percentage" },{ key: "GPA", value: "GPA" },{ key: "Total", value: "Total" }];
+  enqSource = [{ key: "Newspaper", value: "Newspaper" },{ key: "Friends", value: "Friends" },{ key: "Internet", value: "Internet" }];
+  guardianRelation = [{ key: "Father", value: "Father" },{ key: "Mother", value: "Mother" },{ key: "Uncle", value: "Uncle" }];
+  guardianOccupation = [{ key: "Student", value: "Student" },{ key: "Service", value: "Service" },{ key: "Housewife", value: "Housewife" }];
+
   private diffState: boolean;
 
   private personal: FormGroup;
@@ -26,20 +43,20 @@ export class InqDetailsPage {
       gender: ['', Validators.required],
       dob: ['', Validators.required],
       // phone: [''],
-      mobile: ['', Validators.required],
-      email: ['', Validators.email],
-      highestEducation: ['', Validators.required],
+      mobile: ['', [Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
+      email: ['', [Validators.required, Validators.email]],
+      hQualification: ['', Validators.required],
       computerKnowledge: ['', Validators.required],
       areaOfInterest: ['', Validators.required]
     });
 
     this.address = this.formBuilder.group({
-      street: ['', Validators.required],
+      addressLine1: ['', Validators.required],
       area: ['', Validators.required],
-      city: ['jaipur', Validators.required],
-      state: ['rajasthan', Validators.required],
-      pincode: ['',Validators.required],
-      country: ['india', Validators.required]
+      city: ['Jaipur', Validators.required],
+      state: ['Rajasthan', Validators.required],
+      pin: ['',Validators.required],
+      country: ['India', Validators.required]
     });
 
     this.education = this.formBuilder.group({
@@ -56,15 +73,15 @@ export class InqDetailsPage {
     this.guardian = this.formBuilder.group({
       name: ['',Validators.required],
       relation: ['',Validators.required],
-      phoneNumber: ['',Validators.required],
-      alternatePhone: [''],
-      email: [''],
+      phoneNumber: ['',[Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
+      alternatePhone: ['',[Validators.minLength(10),Validators.maxLength(10)]],
+      email: ['', Validators.email],
       occupation: ['']
     });
 
     this.marketing = this.formBuilder.group({
       source: ['',Validators.required],
-      isReferred: ['false'],
+      isReferred: [false],
       referrer: ['']
     });
 
