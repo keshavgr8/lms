@@ -77,12 +77,10 @@ export class InqForm1Page {
     if(this.inqForm.valid){
       console.log("Form to be logged", this.inqForm.value);
       this.presentLoadingCustom();
-      // setTimeout(()=>{this.navCtrl.push(InqForm2Page);},2000);
       this.inqProvider.createInq(this.inqForm.value)
         .subscribe(
         data => { 
           this.responseData = data;
-
           if(this.responseData.data){
             this.notify.showInfo("Inquiry Registered Successfully");
             console.log("POST successful, the response data is:", data)
@@ -92,7 +90,13 @@ export class InqForm1Page {
           }
         },
         error => { console.log("POST unsuccessful, the server returned this error:", error); this.loading.dismissAll(); },
-        () => { console.log("complete"); this.loading.dismissAll(); }
+        () => {
+          console.log("complete");
+          this.loading.dismissAll();
+          if(this.responseData.data){
+            this.navCtrl.push(InqForm2Page,{ data: this.responseData });
+          }
+        }
         );
     }else{
       this.notify.showError("Invalid Form! Please fill proper values");

@@ -13,5 +13,8 @@ export class InqProvider {
   createInq(data){
     return this.http.post(this.baseUrl+'/register',data);
   }
-
+  
+  updateInq(data){
+    return this.http.post(this.baseUrl+'/update',data);
+  }
 }

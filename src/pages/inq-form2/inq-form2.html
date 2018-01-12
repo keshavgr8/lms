@@ -20,12 +20,8 @@
           <ion-col>
             <ion-item>
               <ion-label>Qualification</ion-label>
-              <ion-select formControlName="qualification">
-                <ion-option value="ssc">SSC</ion-option>
-                <ion-option value="hsc">HSC</ion-option>
-                <ion-option value="undergraduate">Under Graduate</ion-option>
-                <ion-option value="graduate">Graduate</ion-option>
-                <ion-option value="postgraduate">Post Graduate</ion-option>
+              <ion-select formControlName="educationQualification">
+                <ion-option *ngFor="let qualification of hQualifications" [value]=qualification.key>{{qualification.value}}</ion-option>
               </ion-select>
             </ion-item>
           </ion-col>
@@ -33,9 +29,7 @@
             <ion-item>
               <ion-label>Stream</ion-label>
               <ion-select formControlName="stream">
-                <ion-option value="arts">Arts</ion-option>
-                <ion-option value="commerce">Commerce</ion-option>
-                <ion-option value="science">Science</ion-option>
+                <ion-option *ngFor="let stream of streams" [value]=stream.key>{{stream.value}}</ion-option>
               </ion-select>
             </ion-item>
           </ion-col>
@@ -50,7 +44,7 @@
           <ion-col>
             <ion-item>
               <ion-label>Institute</ion-label>
-              <ion-input type="text" formControlName="institute"></ion-input>
+              <ion-input type="text" formControlName="instituteName"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -59,8 +53,7 @@
             <ion-item>
               <ion-label>Education Status</ion-label>
               <ion-select formControlName="status">
-                <ion-option value="pursuing">Pursuing</ion-option>
-                <ion-option value="completed">Completed</ion-option>
+                <ion-option *ngFor="let status of eduStatus" [value]=status.key>{{status.value}}</ion-option>
               </ion-select>
             </ion-item>
           </ion-col>
@@ -68,8 +61,7 @@
             <ion-item>
               <ion-label>Education Type</ion-label>
               <ion-select formControlName="type">
-                <ion-option value="regular">Regular</ion-option>
-                <ion-option value="distance">Distance</ion-option>
+                <ion-option *ngFor="let type of eduType" [value]=type.key>{{type.value}}</ion-option>
               </ion-select>
             </ion-item>
           </ion-col>
@@ -78,16 +70,14 @@
           <ion-col>
             <ion-item>
               <ion-label>Marks</ion-label>
-              <ion-input type="number" formControlName="aggregate"></ion-input>
+              <ion-input type="number" formControlName="aggregateMarks"></ion-input>
             </ion-item>
           </ion-col>
           <ion-col>
             <ion-item>
               <ion-label>Marking Scheme</ion-label>
               <ion-select formControlName="markScheme">
-                <ion-option value="percent">Percent</ion-option>
-                <ion-option value="gpa">GPA</ion-option>
-                <ion-option value="total">Total</ion-option>
+                <ion-option *ngFor="let scheme of markScheme" [value]=scheme.key>{{scheme.value}}</ion-option>
               </ion-select>
             </ion-item>
           </ion-col>
@@ -107,7 +97,9 @@
           <ion-col>
             <ion-item>
               <ion-label>Relation</ion-label>
-              <ion-input type="text" formControlName="relation"></ion-input>
+              <ion-select type="text" formControlName="relation">
+                <ion-option *ngFor="let relation of guardianRelation" [value]=relation.key>{{relation.value}}</ion-option>
+              </ion-select>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -121,7 +113,8 @@
           <ion-col>
             <ion-item>
               <ion-label>Alternate Number</ion-label>
-              <ion-input type="number" formControlName="alternatePhone"></ion-input>
+              <!-- <ion-input type="number" formControlName="alternatePhone"></ion-input> -->
+              <ion-input type="number"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -135,7 +128,9 @@
           <ion-col>
             <ion-item>
               <ion-label>Occupation</ion-label>
-              <ion-input type="text" formControlName="occupation"></ion-input>
+              <ion-select type="text" formControlName="occupation">
+                <ion-option *ngFor="let occupation of guardianOccupation" [value]=occupation.key>{{occupation.value}}</ion-option>
+              </ion-select>
             </ion-item>
           </ion-col>
         </ion-row>
