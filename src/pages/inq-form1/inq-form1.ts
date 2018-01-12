@@ -57,6 +57,8 @@ export class InqForm1Page {
     console.log('ionViewDidLoad InqForm1Page');
   }
 
+  today : string = new Date().toISOString();
+
   private loading;
 
   presentLoadingCustom() {
