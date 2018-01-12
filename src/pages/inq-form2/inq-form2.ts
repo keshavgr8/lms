@@ -6,13 +6,6 @@ import { Validators } from '@angular/forms';
 
 import { InqForm3Page } from '../inq-form3/inq-form3';
 
-/**
- * Generated class for the InqForm2Page page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @Component({
   selector: 'page-inq-form2',
   templateUrl: 'inq-form2.html',

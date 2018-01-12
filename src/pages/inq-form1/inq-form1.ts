@@ -8,13 +8,6 @@ import { InqProvider } from '../../providers/inq/inq';
 import { NotificationProvider } from '../../providers/notification/notification'
 import { InqForm2Page } from '../inq-form2/inq-form2';
 
-/**
- * Generated class for the InqForm1Page page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @Component({
   selector: 'page-inq-form1',
   templateUrl: 'inq-form1.html',
