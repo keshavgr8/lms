@@ -4,14 +4,9 @@ import { FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
+import { InqProvider } from '../../providers/inq/inq';
+import { NotificationProvider } from '../../providers/notification/notification'
 import { InqForm2Page } from '../inq-form2/inq-form2';
-
-/**
- * Generated class for the InqForm1Page page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @Component({
   selector: 'page-inq-form1',
@@ -20,10 +15,20 @@ import { InqForm2Page } from '../inq-form2/inq-form2';
 export class InqForm1Page {
 
   private diffState: boolean;
-
+  private responseData;
   private inqForm: FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, public loadingCtrl: LoadingController) {
+  genders = [{ key: "Male", value: "Male" }, { key: "Female", value: "Female" }];
+  hQualifications = [{ key: "SSC", value: "SSC" }, { key: "HSC", value: "HSC" }, { key: "Undergraduate", value: "Under Graduate" }, { key: "Graduate", value: "Graduate" }, { key: "Post Graduate", value: "Post Graduate" }, { key: "Engineer", value: "Engineer" }, { key: "Diploma", value: "Diploma" }];
+  computerKnowledge = [{ key: "Basic", value: "Basic" }, { key: "Prior", value: "Prior" }, { key: "Advance", value: "Advance" }, { key: "None", value: "None" }];
+  areasOfInterest = [{ key: "VFX", value: "VFX" }, { key: "Web Developement", value: "Web Developement" }, { key: "Web Design", value: "Web Design" }];
+  countries = [{ key: "India", value: "India" }];
+  states = [{ key: "Rajasthan", value: "Rajasthan" }];
+  cities = [{ key: "Jaipur", value: "Jaipur" }, { key: "Jodhpur", value: "Jodhpur" }];
+  pincodes = [{ key: "302021", value: "302021" }];
+  areas = [{ key: "Vaishali Nagar", value: "Vaishali Nagar" }];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider) {
     this.inqForm = this.formBuilder.group({
       name: ['', Validators.required],
       // lname: [''],
@@ -32,14 +37,14 @@ export class InqForm1Page {
       address: this.formBuilder.group({
         addressLine1: ['', Validators.required],
         area: ['', Validators.required],
-        city: ['jaipur', Validators.required],
-        state: ['rajasthan', Validators.required],
-        pincode: ['',Validators.required],
-        country: ['india', Validators.required]
+        city: ['Jaipur', Validators.required],
+        state: ['Rajasthan', Validators.required],
+        pin: ['', Validators.required],
+        country: ['India', Validators.required]
       }),
       // phone: [''],
-      mobile: ['', Validators.required],
-      email: ['', Validators.email],
+      mobile: ['', [Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
+      email: ['', [Validators.required, Validators.email]],
       hQualification: ['', Validators.required],
       computerKnowledge: ['', Validators.required],
       areaOfInterest: ['', Validators.required]
@@ -52,25 +57,48 @@ export class InqForm1Page {
     console.log('ionViewDidLoad InqForm1Page');
   }
 
-  presentLoadingCustom(){
-    let loading = this.loadingCtrl.create({
+  today : string = new Date().toISOString();
+
+  private loading;
+
+  presentLoadingCustom() {
+    this.loading = this.loadingCtrl.create({
       spinner: 'hide',
       content: `
         <img src="../../assets/imgs/loading.svg" />
-      `,
-      duration: 3000
+      `
     });
-    loading.onDidDismiss(() => {
+    this.loading.onDidDismiss(() => {
       console.log('Dismissed loading');
     });
-  
-    loading.present();
+
+    this.loading.present();
   }
 
-  private logForm() {
-    console.log(this.inqForm.value);
-    this.presentLoadingCustom();
-    setTimeout(()=>{this.navCtrl.push(InqForm2Page);},2000);
+  logForm1() {
+    if(this.inqForm.valid){
+      console.log("Form to be logged", this.inqForm.value);
+      this.presentLoadingCustom();
+      // setTimeout(()=>{this.navCtrl.push(InqForm2Page);},2000);
+      this.inqProvider.createInq(this.inqForm.value)
+        .subscribe(
+        data => { 
+          this.responseData = data;
+
+          if(this.responseData.data){
+            this.notify.showInfo("Inquiry Registered Successfully");
+            console.log("POST successful, the response data is:", data)
+          }else{
+            this.notify.showError("Server retutned an error. Cannot register inquiry.")
+            console.log("POST unsucessful, server responded with error", this.responseData.exception)
+          }
+        },
+        error => { console.log("POST unsuccessful, the server returned this error:", error); this.loading.dismissAll(); },
+        () => { console.log("complete"); this.loading.dismissAll(); }
+        );
+    }else{
+      this.notify.showError("Invalid Form! Please fill proper values");
+    }
   }
 
   changeState() {

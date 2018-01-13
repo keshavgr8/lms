@@ -4,13 +4,6 @@ import { FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
-/**
- * Generated class for the InqForm3Page page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @Component({
   selector: 'page-inq-form3',
   templateUrl: 'inq-form3.html',
@@ -31,7 +24,7 @@ export class InqForm3Page {
     console.log('ionViewDidLoad InqForm3Page');
   }
 
-  private logForm(){
+  logForm3(){
     console.log(this.inqForm.value);
   }
 

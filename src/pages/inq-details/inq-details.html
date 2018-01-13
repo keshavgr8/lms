@@ -1,0 +1,298 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>inq-details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-grid>
+    <form>
+      <ion-item-divider color="light">Personal Details</ion-item-divider>
+      <div [formGroup]="personal">
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Name</ion-label>
+              <ion-input type="text" formControlName="name"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Mobile No.</ion-label>>
+              <ion-input type="number" formControlName="mobile" min="0"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Email</ion-label>
+              <ion-input type="email" formControlName="email"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Gender</ion-label>
+              <ion-select formControlName="gender">
+                <ion-option *ngFor="let gender of genders" [value]=gender.key>{{gender.value}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Date of Birth</ion-label>
+              <ion-datetime displayFormat="D MMM YYYY" pickerFormat="D MMM YYYY" min = "1900" [max] = "today" formControlName="dob"></ion-datetime>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Education</ion-label>
+              <ion-select formControlName="hQualification">
+                <ion-option *ngFor="let qualification of hQualifications" [value]=qualification.key>{{qualification.value}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Computer Knowledge</ion-label>
+              <ion-select formControlName="computerKnowledge">
+                <ion-option *ngFor="let knowledge of computerKnowledge" [value]=knowledge.key>{{knowledge.value}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Course Interested In</ion-label>
+              <ion-select formControlName="areaOfInterest">
+                <ion-option *ngFor="let areaOfInterest of areasOfInterest" [value]=areaOfInterest.key>{{areaOfInterest.value}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </div>
+      <ion-item-divider color="light">Address
+        <span (click)="changeState()" class="changeState" float-right>Rajasthan&nbsp;&nbsp;
+          <ion-icon name="md-create">&nbsp;</ion-icon>
+        </span>
+      </ion-item-divider>
+      <ion-row [formGroup]="address">
+        <ion-col no-padding>
+          <ion-row>
+            <ion-col *ngIf="diffState">
+              <ion-item>
+                <ion-label floating>Country</ion-label>
+                <ion-select formControlName="country">
+                  <ion-option *ngFor="let country of countries" [value]=country.key>{{country.value}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col *ngIf="diffState">
+              <ion-item>
+                <ion-label floating>State</ion-label>
+                <ion-select formControlName="state">
+                  <ion-option *ngFor="let state of states" [value]=state.key>{{state.value}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label floating>City</ion-label>
+                <ion-select formControlName="city">
+                  <ion-option *ngFor="let city of cities" [value]=city.key>{{city.value}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label floating>Pincode</ion-label>
+                <ion-select formControlName="pin">
+                  <ion-option *ngFor="let pincode of pincodes" [value]=pincode.key>{{pincode.value}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label floating>Area</ion-label>
+                <ion-select formControlName="area">
+                  <ion-option *ngFor="let area of areas" [value]=area.key>{{area.value}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label>Street</ion-label>
+                <ion-input type="text" formControlName="addressLine1"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <!-- <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label>Phone No.</ion-label>>
+                  <ion-input type="number" formControlName="phone"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row> -->
+      <ion-item-divider color="light">Additional Education Details</ion-item-divider>
+      <div [formGroup]="education">
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Qualification</ion-label>
+              <ion-select formControlName="qualification">
+                <ion-option *ngFor="let qualification of hQualifications" [value]=qualification.key>{{qualification.value}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Stream</ion-label>
+              <ion-select formControlName="stream">
+                <ion-option *ngFor="let stream of streams" [value]=stream.key>{{stream.value}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Year of Completion</ion-label>
+              <ion-input type="number" formControlName="year"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Institute</ion-label>
+              <ion-input type="text" formControlName="institute"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Education Status</ion-label>
+              <ion-select formControlName="status">
+                <ion-option *ngFor="let status of eduStatus" [value]=status.key>{{status.value}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Education Type</ion-label>
+              <ion-select formControlName="type">
+                <ion-option *ngFor="let type of eduType" [value]=type.key>{{type.value}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Marks</ion-label>
+              <ion-input type="number" formControlName="aggregate"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Marking Scheme</ion-label>
+              <ion-select formControlName="markScheme">
+                <ion-option *ngFor="let scheme of markScheme" [value]=scheme.key>{{scheme.value}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </div>
+      <ion-item-divider color="light">Guardian's Details</ion-item-divider>
+      <div [formGroup]="guardian">
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Name</ion-label>
+              <ion-input type="text" formControlName="name"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Relation</ion-label>
+              <ion-select type="text" formControlName="relation">
+                <ion-option *ngFor="let relation of guardianRelation" [value]=relation.key>{{relation.value}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Phone Number</ion-label>
+              <ion-input type="number" formControlName="phoneNumber"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Alternate Number</ion-label>
+              <ion-input type="number" formControlName="alternatePhone"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Email</ion-label>
+              <ion-input type="email" formControlName="email"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Occupation</ion-label>
+              <ion-select type="text" formControlName="occupation">
+                <ion-option *ngFor="let occupation of guardianOccupation" [value]=occupation.key>{{occupation.value}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </div>
+      <ion-item-divider color="light">How did you hear about us?</ion-item-divider>
+      <div [formGroup]="marketing">
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Source</ion-label>
+              <ion-select formControlName="source">
+                <ion-option *ngFor="let source of enqSource" [value]=source.key>{{source.value}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Referred</ion-label>
+              <ion-toggle formControlName="isReferred"></ion-toggle>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf = "marketing.controls.isReferred.value">
+          <ion-col>
+            <ion-item>
+              <ion-label>Referrer Name</ion-label>
+              <ion-input type="text" formControlName="referrer"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </div>
+      <br>
+      <button ion-button full type="submit">Update</button>
+    </form>
+  </ion-grid>
+</ion-content>

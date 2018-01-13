@@ -12,7 +12,19 @@ form{
 }
 
 ion-content{
-        background-image: url(../assets/imgs/bg-6.jpg);
-        // background-repeat-y: no-repeat;
-        background-position: bottom;
+    background-image: url(../assets/imgs/bg-6.jpg);
+    // background-repeat-y: no-repeat;
+    background-position: bottom;
+}
+
+.error-notification{
+    .toast-wrapper{
+        background-color: #f53d3d;
     }
+}
+
+.info-notification{
+    .toast-wrapper{
+        background-color: #488aff;
+    }
+}
