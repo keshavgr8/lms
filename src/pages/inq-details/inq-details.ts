@@ -82,7 +82,7 @@ export class InqDetailsPage {
     this.marketing = this.formBuilder.group({
       source: ['',Validators.required],
       isReferred: [false],
-      referrer: ['']
+      referant: ['']
     });
 
     this.diffState = false;

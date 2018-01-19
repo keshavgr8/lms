@@ -5,7 +5,7 @@ import { FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
 import { InqProvider } from '../../providers/inq/inq';
-import { NotificationProvider } from '../../providers/notification/notification'
+import { NotificationProvider } from '../../providers/notification/notification';
 import { InqForm3Page } from '../inq-form3/inq-form3';
 
 @Component({
@@ -26,11 +26,14 @@ export class InqForm2Page {
   private currentInq;
   private responseData;
   private requestData;
+  private education;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private inqProvider: InqProvider, private notify: NotificationProvider) {
+    this.currentInq = this.navParams.get('data');
+    this.education = this.currentInq.data.hQualification;
     this.inqForm = this.formBuilder.group({
       education: this.formBuilder.group({
-        educationQualification: ['', Validators.required],
+        educationQualification: [this.education, Validators.required],
         instituteName: [''],
         stream: [''],
         status: [''],
@@ -49,7 +52,6 @@ export class InqForm2Page {
       })
     });
 
-    this.currentInq = this.navParams.get('data');
   }
 
   ionViewDidLoad() {
@@ -77,14 +79,18 @@ export class InqForm2Page {
         () => {
           console.log("complete");
           // this.loading.dismissAll();
-          // if(this.responseData.data){
-          //   this.navCtrl.push(InqForm2Page,{ data: this.responseData });
-          // }
+          if(this.responseData.data){
+            this.navCtrl.push(InqForm3Page,{ data: this.responseData });
+          }
         }
         );
     }else{
       this.notify.showError("Invalid Form! Please fill proper values");
     }
+  }
+
+  skip(){
+    this.navCtrl.push(InqForm3Page,{ data: this.currentInq });
   }
 
 }
