@@ -81,7 +81,7 @@ export class InqDetailsPage {
 
     this.marketing = this.formBuilder.group({
       source: ['',Validators.required],
-      isReferred: [false],
+      referred: [false],
       referant: ['']
     });
 

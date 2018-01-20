@@ -28,3 +28,32 @@ ion-content{
         background-color: #488aff;
     }
 }
+
+.pin-autocomplete{
+    ion-label{
+        padding-left: 16px;
+        color: #999;
+        font-size: 16px;
+        margin-bottom: 0;
+    }
+    .completer-holder{
+        // padding: 20px;
+        padding-left: 16px;
+    };
+    .completer-input{
+        padding: 10px;
+        padding-left: 2px;
+        width: 100%;
+        border: none;
+        border-bottom: 2px solid #ebebeb;
+    }
+    .completer-input:focus{
+        border-bottom: 2px solid #488aff;
+    }
+    .completer-input.ng-valid{
+        border-bottom: 2px solid #32db64;
+    }
+    .completer-input.ng-invalid{
+        border-bottom: 2px solid #f53d3d;
+    }
+}

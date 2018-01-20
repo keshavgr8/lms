@@ -3,9 +3,11 @@ import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { CompleterService, CompleterData } from 'ng2-completer';
 
 import { InqProvider } from '../../providers/inq/inq';
-import { NotificationProvider } from '../../providers/notification/notification'
+import { NotificationProvider } from '../../providers/notification/notification';
+import { PincodeProvider } from '../../providers/pincode/pincode';
 import { InqForm2Page } from '../inq-form2/inq-form2';
 
 @Component({
@@ -17,6 +19,7 @@ export class InqForm1Page {
   private diffState: boolean;
   private responseData;
   private inqForm: FormGroup;
+  private pinService: CompleterData;
 
   genders = [{ key: "Male", value: "Male" }, { key: "Female", value: "Female" }];
   hQualifications = [{ key: "SSC", value: "SSC" }, { key: "HSC", value: "HSC" }, { key: "Undergraduate", value: "Under Graduate" }, { key: "Graduate", value: "Graduate" }, { key: "Post Graduate", value: "Post Graduate" }, { key: "Engineer", value: "Engineer" }, { key: "Diploma", value: "Diploma" }];
@@ -25,10 +28,10 @@ export class InqForm1Page {
   countries = [{ key: "India", value: "India" }];
   states = [{ key: "Rajasthan", value: "Rajasthan" }];
   cities = [{ key: "Jaipur", value: "Jaipur" }, { key: "Jodhpur", value: "Jodhpur" }];
-  pincodes = [{ key: "302021", value: "302021" }];
+  // pincodes = [{ key: "302021", value: "302021" }];
   areas = [{ key: "Vaishali Nagar", value: "Vaishali Nagar" }];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider, private pinProvider: PincodeProvider, private completerService: CompleterService) {
     this.inqForm = this.formBuilder.group({
       name: ['', Validators.required],
       // lname: [''],
@@ -51,6 +54,7 @@ export class InqForm1Page {
     });
 
     this.diffState = false;
+    this.pinService = this.completerService.local(this.pinProvider.getPincodes(this.inqForm.value.address.pin), 'data', 'data');
   }
 
   ionViewDidLoad() {

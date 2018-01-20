@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { Ng2CompleterModule } from "ng2-completer";
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -17,6 +18,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { InqProvider } from '../providers/inq/inq';
 import { NotificationProvider } from '../providers/notification/notification';
+import { PincodeProvider } from '../providers/pincode/pincode';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { NotificationProvider } from '../providers/notification/notification';
   imports: [
     BrowserModule,
     HttpClientModule,
+    Ng2CompleterModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -50,7 +53,8 @@ import { NotificationProvider } from '../providers/notification/notification';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     InqProvider,
-    NotificationProvider
+    NotificationProvider,
+    PincodeProvider
   ]
 })
 export class AppModule {}
