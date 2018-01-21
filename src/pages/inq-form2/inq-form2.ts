@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
@@ -28,20 +28,22 @@ export class InqForm2Page {
   private requestData;
   private education;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private inqProvider: InqProvider, private notify: NotificationProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider) {
     this.currentInq = this.navParams.get('data');
     this.education = this.currentInq.data.hQualification;
     this.inqForm = this.formBuilder.group({
-      education: this.formBuilder.group({
-        educationQualification: [this.education, Validators.required],
-        instituteName: [''],
-        stream: [''],
-        status: [''],
-        year: [''],
-        type: [''],
-        aggregateMarks: [''],
-        markScheme: ['']
-      }),
+      education: this.formBuilder.array([
+        this.formBuilder.group({
+          educationQualification: [this.education, Validators.required],
+          instituteName: [''],
+          stream: [''],
+          status: [''],
+          year: [''],
+          type: [''],
+          aggregateMarks: [''],
+          markScheme: ['']
+        })
+      ]),
       guardian: this.formBuilder.group({
         name: ['',Validators.required],
         relation: ['',Validators.required],
@@ -58,11 +60,27 @@ export class InqForm2Page {
     console.log('ionViewDidLoad InqForm2Page');
   }
 
+  private loading;
+
+  presentLoadingCustom() {
+    this.loading = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: `
+        <img src="../../assets/imgs/loading.svg" />
+      `
+    });
+    this.loading.onDidDismiss(() => {
+      console.log('Dismissed loading');
+    });
+
+    this.loading.present();
+  }
+
   logForm2(){
     if(this.inqForm.valid){
       this.requestData = Object.assign({},this.currentInq.data,this.inqForm.value)
       console.log("Form to be logged", this.requestData);
-      // this.presentLoadingCustom();
+      this.presentLoadingCustom();
       this.inqProvider.updateInq(this.requestData)
         .subscribe(
         data => { 
@@ -75,10 +93,10 @@ export class InqForm2Page {
             console.log("POST unsucessful, server responded with error", this.responseData.exception)
           }
         },
-        error => { console.log("POST unsuccessful, the server returned this error:", error); /*this.loading.dismissAll();*/ },
+        error => { console.log("POST unsuccessful, the server returned this error:", error); this.loading.dismissAll(); },
         () => {
           console.log("complete");
-          // this.loading.dismissAll();
+          this.loading.dismissAll();
           if(this.responseData.data){
             this.navCtrl.push(InqForm3Page,{ data: this.responseData });
           }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
@@ -13,7 +13,7 @@ import { NotificationProvider } from '../../providers/notification/notification'
 })
 export class InqForm3Page {
   
-  enqSource = [{ key: "Newspaper", value: "Newspaper" },{ key: "Friends", value: "Friends" },{ key: "Internet", value: "Internet" }];
+  enqSource = [{ key: "Newspaper", value: "Newspaper" },{ key: "Friend", value: "Friend" },{ key: "Internet", value: "Internet" }];
 
   private currentInq;
   private responseData;
@@ -21,7 +21,7 @@ export class InqForm3Page {
 
   private inqForm: FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private inqProvider: InqProvider, private notify: NotificationProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider) {
     this.currentInq = this.navParams.get('data');
     this.inqForm = this.formBuilder.group({
       marketing: this.formBuilder.group({
@@ -36,11 +36,27 @@ export class InqForm3Page {
     console.log('ionViewDidLoad InqForm3Page');
   }
 
+  private loading;
+
+  presentLoadingCustom() {
+    this.loading = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: `
+        <img src="../../assets/imgs/loading.svg" />
+      `
+    });
+    this.loading.onDidDismiss(() => {
+      console.log('Dismissed loading');
+    });
+
+    this.loading.present();
+  }
+
   logForm3(){
     if(this.inqForm.valid){
       this.requestData = Object.assign({},this.currentInq.data,this.inqForm.value)
       console.log("Form to be logged", this.requestData);
-      // this.presentLoadingCustom();
+      this.presentLoadingCustom();
       this.inqProvider.updateInq(this.requestData)
         .subscribe(
         data => { 
@@ -53,13 +69,13 @@ export class InqForm3Page {
             console.log("POST unsucessful, server responded with error", this.responseData.exception)
           }
         },
-        error => { console.log("POST unsuccessful, the server returned this error:", error); /*this.loading.dismissAll();*/ },
+        error => { console.log("POST unsuccessful, the server returned this error:", error); this.loading.dismissAll(); },
         () => {
           console.log("complete");
-          // this.loading.dismissAll();
-          // if(this.responseData.data){
-          //   this.navCtrl.push(InqForm3Page,{ data: this.responseData });
-          // }
+          this.loading.dismissAll();
+          if(this.responseData.data){
+            this.navCtrl.push(InqForm3Page,{ data: this.responseData });
+          }
         }
         );
     }else{

@@ -16,9 +16,9 @@ export class PincodeProvider {
     console.log('Hello PincodeProvider Provider');
   }
 
-  getPincodes(data){
-    return this.http.post(this.baseUrl+'/beginWith', {
-      params: new HttpParams().set('pincode', data)
+  getLocality(pincode){
+    return this.http.get(this.baseUrl+'/equalsTo', {
+      params: new HttpParams().set('pincode', pincode)
     });
   }
 

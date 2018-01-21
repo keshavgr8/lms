@@ -11,11 +11,11 @@ form{
     background-color: #fff;
 }
 
-ion-content{
-    background-image: url(../assets/imgs/bg-6.jpg);
-    // background-repeat-y: no-repeat;
-    background-position: bottom;
-}
+// ion-content{
+//     background-image: url(../assets/imgs/bg-6.jpg);
+//     // background-repeat-y: no-repeat;
+//     background-position: bottom;
+// }
 
 .error-notification{
     .toast-wrapper{
@@ -45,14 +45,14 @@ ion-content{
         padding-left: 2px;
         width: 100%;
         border: none;
-        border-bottom: 2px solid #ebebeb;
+        border-bottom: 1px solid #ebebeb;
     }
     .completer-input:focus{
         border-bottom: 2px solid #488aff;
     }
-    .completer-input.ng-valid{
-        border-bottom: 2px solid #32db64;
-    }
+    // .completer-input.ng-valid{
+    //     border-bottom: 2px solid #32db64;
+    // }
     .completer-input.ng-invalid{
         border-bottom: 2px solid #f53d3d;
     }

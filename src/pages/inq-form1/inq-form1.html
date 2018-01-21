@@ -48,7 +48,7 @@
         <ion-col>
           <ion-item>
             <ion-label>Date of Birth</ion-label>
-            <ion-datetime displayFormat="D MMM YYYY" pickerFormat="D MMM YYYY" formControlName="dob"></ion-datetime>
+            <ion-datetime displayFormat="D MMM YYYY" pickerFormat="D MMM YYYY" min = "1900" [max] = "today" formControlName="dob"></ion-datetime>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -115,7 +115,7 @@
             <ion-col col-3 class="pin-autocomplete">
               <!-- <ion-item> -->
                 <ion-label>Enter Your Pincode</ion-label>
-                <ng2-completer formControlName="pin" [datasource]="pinService" [minSearchLength]="3"></ng2-completer>
+                <ng2-completer formControlName="pin" (selected)="onPincodeSelected($event)" [datasource]="pinService" [minSearchLength]="3"></ng2-completer>
               <!-- </ion-item> -->
             </ion-col>
             <!-- <ion-col>
@@ -132,6 +132,22 @@
               <ion-item>
                 <ion-label>Street</ion-label>
                 <ion-input type="text" formControlName="addressLine1"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="areas">
+            <ion-col col-3>
+              <ion-item>
+                <ion-label floating>Area</ion-label>
+                <ion-select formControlName="area">
+                  <ion-option *ngFor="let area of areas" [value]=area.name>{{area.name}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label floating>City</ion-label>
+                <ion-input type="text" readonly="true" value="{{city}}, {{state}}, {{country}}"></ion-input>
               </ion-item>
             </ion-col>
           </ion-row>

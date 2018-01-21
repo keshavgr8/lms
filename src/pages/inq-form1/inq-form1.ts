@@ -3,7 +3,7 @@ import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { CompleterService, CompleterData } from 'ng2-completer';
+import { CompleterService, RemoteData, CompleterItem } from 'ng2-completer';
 
 import { InqProvider } from '../../providers/inq/inq';
 import { NotificationProvider } from '../../providers/notification/notification';
@@ -19,17 +19,23 @@ export class InqForm1Page {
   private diffState: boolean;
   private responseData;
   private inqForm: FormGroup;
-  private pinService: CompleterData;
+  private pinService: RemoteData;
+  private localities;
+  private areas;
+  private city;
+  private state;
+  private country;
+
+  today : string = new Date().toISOString();
 
   genders = [{ key: "Male", value: "Male" }, { key: "Female", value: "Female" }];
   hQualifications = [{ key: "SSC", value: "SSC" }, { key: "HSC", value: "HSC" }, { key: "Undergraduate", value: "Under Graduate" }, { key: "Graduate", value: "Graduate" }, { key: "Post Graduate", value: "Post Graduate" }, { key: "Engineer", value: "Engineer" }, { key: "Diploma", value: "Diploma" }];
   computerKnowledge = [{ key: "Basic", value: "Basic" }, { key: "Prior", value: "Prior" }, { key: "Advance", value: "Advance" }, { key: "None", value: "None" }];
   areasOfInterest = [{ key: "VFX", value: "VFX" }, { key: "Web Developement", value: "Web Developement" }, { key: "Web Design", value: "Web Design" }];
-  countries = [{ key: "India", value: "India" }];
-  states = [{ key: "Rajasthan", value: "Rajasthan" }];
-  cities = [{ key: "Jaipur", value: "Jaipur" }, { key: "Jodhpur", value: "Jodhpur" }];
+  // countries = [{ key: "India", value: "India" }];
+  // states = [{ key: "Rajasthan", value: "Rajasthan" }];
+  // cities = [{ key: "Jaipur", value: "Jaipur" }, { key: "Jodhpur", value: "Jodhpur" }];
   // pincodes = [{ key: "302021", value: "302021" }];
-  areas = [{ key: "Vaishali Nagar", value: "Vaishali Nagar" }];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private inqProvider: InqProvider, private notify: NotificationProvider, private pinProvider: PincodeProvider, private completerService: CompleterService) {
     this.inqForm = this.formBuilder.group({
@@ -40,10 +46,10 @@ export class InqForm1Page {
       address: this.formBuilder.group({
         addressLine1: ['', Validators.required],
         area: ['', Validators.required],
-        city: ['Jaipur', Validators.required],
-        state: ['Rajasthan', Validators.required],
+        city: [''],
+        state: [''],
         pin: ['', Validators.required],
-        country: ['India', Validators.required]
+        country: ['']
       }),
       // phone: [''],
       mobile: ['', [Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
@@ -54,7 +60,11 @@ export class InqForm1Page {
     });
 
     this.diffState = false;
-    this.pinService = this.completerService.local(this.pinProvider.getPincodes(this.inqForm.value.address.pin), 'data', 'data');
+    this.pinService = this.completerService.remote(null);
+    this.pinService.urlFormater(term => {
+      return `http://localhost:9002/pincode/beginWith?pincode=${term}`;
+    });
+    this.pinService.dataField("data");
   }
 
   ionViewDidLoad() {
@@ -78,6 +88,9 @@ export class InqForm1Page {
   }
 
   logForm1() {
+    this.inqForm.value.address.city = this.city;
+    this.inqForm.value.address.state = this.state;
+    this.inqForm.value.address.country = this.country;
     if(this.inqForm.valid){
       console.log("Form to be logged", this.inqForm.value);
       this.presentLoadingCustom();
@@ -109,6 +122,30 @@ export class InqForm1Page {
 
   changeState() {
     this.diffState = !this.diffState;
+  }
+
+  setLocality(locality){
+    this.city = locality.data.city.name;
+    this.state = locality.data.state;
+    this.country = locality.data.country;
+    this.areas = locality.data.locality;
+  }
+
+  getLocality(pincode){
+    console.log("Getting localities for: ",pincode)
+    this.pinProvider.getLocality(pincode)
+      .subscribe(
+        data => {console.log(data), this.localities = data;},
+        error => {console.log("ERROR")},
+        () => {console.log("COMPLETE"), this.setLocality(this.localities);}
+      )
+  }
+
+  onPincodeSelected(pincode: CompleterItem){
+    if(pincode){
+      console.log(pincode);
+      this.getLocality(pincode.originalObject);
+    }
   }
 
 }

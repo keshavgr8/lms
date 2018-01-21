@@ -15,73 +15,75 @@
     <ion-grid>
       <!-- <ion-item-group> -->
       <ion-item-divider color="light">Additional Education Details</ion-item-divider>
-      <div formGroupName="education">
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-label>Qualification</ion-label>
-              <ion-select formControlName="educationQualification">
-                <ion-option *ngFor="let qualification of hQualifications" [value]=qualification.key>{{qualification.value}}</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item>
-              <ion-label>Stream</ion-label>
-              <ion-select formControlName="stream">
-                <ion-option *ngFor="let stream of streams" [value]=stream.key>{{stream.value}}</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item>
-              <ion-label>Year of Completion</ion-label>
-              <ion-input type="number" formControlName="year"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-label>Institute</ion-label>
-              <ion-input type="text" formControlName="instituteName"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-label>Education Status</ion-label>
-              <ion-select formControlName="status">
-                <ion-option *ngFor="let status of eduStatus" [value]=status.key>{{status.value}}</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item>
-              <ion-label>Education Type</ion-label>
-              <ion-select formControlName="type">
-                <ion-option *ngFor="let type of eduType" [value]=type.key>{{type.value}}</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-label>Marks</ion-label>
-              <ion-input type="number" formControlName="aggregateMarks"></ion-input>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item>
-              <ion-label>Marking Scheme</ion-label>
-              <ion-select formControlName="markScheme">
-                <ion-option *ngFor="let scheme of markScheme" [value]=scheme.key>{{scheme.value}}</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+      <div formArrayName="education" *ngFor="let item of inqForm.get('education').controls; let i = index;">
+        <div [formGroupName]="i">
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label>Qualification</ion-label>
+                <ion-select formControlName="educationQualification">
+                  <ion-option *ngFor="let qualification of hQualifications" [value]=qualification.key>{{qualification.value}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label>Stream</ion-label>
+                <ion-select formControlName="stream">
+                  <ion-option *ngFor="let stream of streams" [value]=stream.key>{{stream.value}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label>Year of Completion</ion-label>
+                <ion-input type="number" formControlName="year"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label>Institute</ion-label>
+                <ion-input type="text" formControlName="instituteName"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label>Education Status</ion-label>
+                <ion-select formControlName="status">
+                  <ion-option *ngFor="let status of eduStatus" [value]=status.key>{{status.value}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label>Education Type</ion-label>
+                <ion-select formControlName="type">
+                  <ion-option *ngFor="let type of eduType" [value]=type.key>{{type.value}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label>Marks</ion-label>
+                <ion-input type="number" formControlName="aggregateMarks"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label>Marking Scheme</ion-label>
+                <ion-select formControlName="markScheme">
+                  <ion-option *ngFor="let scheme of markScheme" [value]=scheme.key>{{scheme.value}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </div>
       </div>
       <!-- </ion-item-group> -->
       <!-- <ion-item-group> -->
